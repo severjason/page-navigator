@@ -38,7 +38,8 @@ export const FormPageSettings: React.FC<Pick<FormPage, 'id'>> = ({ id }) => {
         </Dropdown.Lib.MenuTrigger>
         <Dropdown.Lib.MenuContent align="start">
           <Dropdown.Lib.Label
-            className={`text-secondary-950 text-base px-3 py-2 bg-secondary-50 border-b-[0.5px] border-secondary-200`}
+            className={`text-secondary-950 text-base px-3 py-2 bg-secondary-50 
+            border-b-[0.5px] border-secondary-200 font-secondary`}
           >
             Settings
           </Dropdown.Lib.Label>
