@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react';
 
+import { Layouts } from 'src/shared/components';
+
 import { FormPageLayout } from '@/app/form-pages/components/FormPageLayout';
-import { Layouts } from '@/components';
 
 export default async function PageLayout({ children }: { children: ReactNode }) {
   return (

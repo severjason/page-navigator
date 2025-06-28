@@ -1,0 +1,10 @@
+export { DotsIcon } from './Dots';
+export { InfoIcon } from './Info';
+export { DocumentIcon } from './Document';
+export { CircleCheckIcon } from './CircleCheckIcon';
+export { PlusIcon } from './PlusIcon';
+export { FlagIcon } from './FlagIcon';
+export { PencilIcon } from './PencilIcon';
+export { ClipboardIcon } from './ClipboardIcon';
+export { DoubleSquaresIcon } from './DoubleSquaresIcon';
+export { TrashCanIcon } from './TrashCanIcon';

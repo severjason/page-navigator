@@ -41,7 +41,7 @@ const eslintConfig = [
       'import/prefer-default-export': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/function-component-definition': 'off',
-      'max-len': ['error', { code: 120, ignorePattern: '^import .*' }],
+      'max-len': ['error', { code: 120, ignorePattern: '^import .* | d=' }],
       'react/display-name': 'off',
       'no-console': 'warn',
       'react-hooks/rules-of-hooks': 'error',

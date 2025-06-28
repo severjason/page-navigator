@@ -21,9 +21,8 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"],
+      "@/app/*": ["src/app/*"]
     },
     "plugins": [
       {
@@ -33,6 +32,7 @@
   },
   "include": [
     "next-env.d.ts",
+    "declarations.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",

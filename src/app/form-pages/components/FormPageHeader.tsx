@@ -3,36 +3,27 @@
 import React from 'react';
 
 import { useFormPageContext } from '@/app/form-pages/hooks/useFormPageContext';
-import { FormPage } from '@/app/form-pages/interfaces/formPage';
-import { Buttons } from '@/components';
 
+import { AddPageButton } from './AddPageButton';
+import { AddPageDialog } from './AddPageDialog';
 import { FormPageElement } from './FormPageItem';
-
-const Divider = () => <div className={'w-10 bg-red-400'} />;
-
-const renderFormPageElement = (page: FormPage, index: number, array: FormPage[]) => {
-  const nextIndex = index + 1;
-  const isBetweenElements = array[nextIndex];
-  if (array.length === nextIndex) return <FormPageElement key={page.id} {...page} />;
-  return (
-    <React.Fragment key={page.id}>
-      <FormPageElement {...page} />
-      {isBetweenElements && <Divider />}
-    </React.Fragment>
-  );
-};
+import { FormPageItemDivider } from './FormPageItemDivider';
+import { ResetStateButton } from './ResetStateButton';
 
 export const FormPageHeader = () => {
-  const { pages, onAddPage } = useFormPageContext();
-
-  const onAdd = () => {
-    onAddPage(pages[pages.length - 1].id, { title: 'Test' });
-  };
+  const { pages } = useFormPageContext();
 
   return (
-    <div className="flex flex-row flex-nowrap w-full p-5">
-      {pages.map(renderFormPageElement)}
-      <Buttons.Base onClick={onAdd}>Add</Buttons.Base>
+    <div className="flex flex-row flex-nowrap w-full p-5 overflow-x-auto">
+      {pages.map((page, index) => (
+        <React.Fragment key={page.id}>
+          <FormPageElement {...page} index={index} isLast={index === pages.length - 1} />
+          <FormPageItemDivider prevItemId={page.id} />
+        </React.Fragment>
+      ))}
+      <AddPageButton />
+      <ResetStateButton />
+      <AddPageDialog />
     </div>
   );
 };

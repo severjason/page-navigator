@@ -11,6 +11,7 @@ import { buttonVariants } from './styles';
 export type ButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'size'> &
   VariantProps<typeof buttonVariants> & {
     isLoading?: boolean;
+    wrapperClasses?: string;
     ref?: React.Ref<HTMLButtonElement>;
   };
 
@@ -33,13 +34,14 @@ export const Button: React.FC<ButtonProps> = ({
   ref,
   variant,
   size,
+  wrapperClasses,
   ...rest
 }) => {
   const classes = clsx(buttonVariants({ variant, size, className }));
   return (
     <button role="button" disabled={isLoading || disabled} tabIndex={0} className={classes} ref={ref} {...rest}>
       <ButtonLoader isLoading={isLoading}>
-        <span>{children}</span>
+        <span className={clsx('flex flex-nowrap gap-2 items-center', wrapperClasses)}>{children}</span>
       </ButtonLoader>
     </button>
   );

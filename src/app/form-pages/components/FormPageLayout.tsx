@@ -2,12 +2,15 @@
 
 import React, { ReactNode, useEffect, useState } from 'react';
 
+import { Loaders } from 'src/shared/components';
+
 import { FormPageHeader } from '@/app/form-pages/components/FormPageHeader';
+import { AddPageProvider } from '@/app/form-pages/hooks/useAddPage';
 import { FormPagesProvider } from '@/app/form-pages/hooks/useFormPageContext';
-import { Loaders } from '@/components';
 
 export const FormPageLayout = ({ children }: { children: ReactNode }) => {
   const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -16,8 +19,10 @@ export const FormPageLayout = ({ children }: { children: ReactNode }) => {
 
   return (
     <FormPagesProvider>
-      <FormPageHeader />
-      {children}
+      <AddPageProvider>
+        <FormPageHeader />
+        {children}
+      </AddPageProvider>
     </FormPagesProvider>
   );
 };

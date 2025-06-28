@@ -20,7 +20,7 @@ type SetPagesAction = { type: FormPageActionType.setPages; pages: State['pages']
 
 type Action = InsertPageAction | RemovePageAction | ReorderPageAction | SetPagesAction;
 
-type State = { pages: FormPage[]; activePageId: string | null };
+type State = { pages: FormPage[] };
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
@@ -57,7 +57,7 @@ function reducer(state: State, action: Action): State {
 }
 
 export function useFormPagesReducer(initialPages: FormPage[]) {
-  const [state, dispatch] = useReducer(reducer, { pages: initialPages, activePageId: null });
+  const [state, dispatch] = useReducer(reducer, { pages: initialPages });
 
   return { state, dispatch };
 }
