@@ -11,14 +11,14 @@ import { FormPageItemDivider } from './FormPageItemDivider';
 import { ResetStateButton } from './ResetStateButton';
 
 export const FormPageHeader = () => {
-  const { pages } = useFormPageContext();
+  const { order, pages } = useFormPageContext();
 
   return (
     <div className="flex flex-row flex-nowrap w-full p-5 overflow-x-auto">
-      {pages.map((page, index) => (
-        <React.Fragment key={page.id}>
-          <FormPageElement {...page} index={index} isLast={index === pages.length - 1} />
-          <FormPageItemDivider prevItemId={page.id} />
+      {order.map((pageId, index) => (
+        <React.Fragment key={pageId}>
+          <FormPageElement {...pages[pageId]} index={index} isLast={index === order.length - 1} />
+          <FormPageItemDivider prevItemId={pageId} />
         </React.Fragment>
       ))}
       <AddPageButton />

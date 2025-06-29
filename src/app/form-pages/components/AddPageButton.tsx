@@ -9,10 +9,10 @@ import { PlusIcon } from '@/shared/icons';
 
 export const AddPageButton = () => {
   const { onOpen } = useAddPageContext();
-  const { pages } = useFormPageContext();
+  const { order } = useFormPageContext();
 
   return (
-    <Buttons.Base onClick={() => onOpen(pages[pages.length - 1].id)}>
+    <Buttons.Base onClick={() => onOpen(order[order.length - 1])}>
       <PlusIcon className="h-4 w-4" />
       Add page
     </Buttons.Base>

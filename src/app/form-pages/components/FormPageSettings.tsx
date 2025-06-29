@@ -22,9 +22,9 @@ const SettingMenuItem: React.FC<MenuLinkProps> = ({ icon, title, className, ...p
 
 export const FormPageSettings: React.FC<Pick<FormPage, 'id'>> = ({ id }) => {
   const { id: paramId } = useParams<{ id: string }>();
-  const { onRemovePage, pages } = useFormPageContext();
+  const { onRemovePage, order } = useFormPageContext();
 
-  const isDeleteAllowed = pages.length > 1;
+  const isDeleteAllowed = order.length > 1;
 
   const isActive = paramId === id;
 
