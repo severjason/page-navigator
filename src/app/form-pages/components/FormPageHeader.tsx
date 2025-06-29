@@ -3,21 +3,24 @@
 import React from 'react';
 
 import { useFormPageContext } from '@/app/form-pages/hooks/useFormPageContext';
+import { useTrackItemsDrop } from '@/app/form-pages/hooks/useTrackItemsDrop';
 
 import { AddPageButton } from './AddPageButton';
 import { AddPageDialog } from './AddPageDialog';
-import { FormPageElement } from './FormPageItem';
+import { DraggableFormPageElement } from './FormPageItem';
 import { FormPageItemDivider } from './FormPageItemDivider';
 import { ResetStateButton } from './ResetStateButton';
 
 export const FormPageHeader = () => {
   const { order, pages } = useFormPageContext();
 
+  useTrackItemsDrop();
+
   return (
     <div className="flex flex-row flex-nowrap w-full p-5 overflow-x-auto">
       {order.map((pageId, index) => (
         <React.Fragment key={pageId}>
-          <FormPageElement {...pages[pageId]} index={index} isLast={index === order.length - 1} />
+          <DraggableFormPageElement page={pages[pageId]} index={index} isLast={index === order.length - 1} />
           <FormPageItemDivider prevItemId={pageId} />
         </React.Fragment>
       ))}

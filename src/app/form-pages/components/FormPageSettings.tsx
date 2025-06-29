@@ -22,9 +22,10 @@ const SettingMenuItem: React.FC<MenuLinkProps> = ({ icon, title, className, ...p
 
 export const FormPageSettings: React.FC<Pick<FormPage, 'id'>> = ({ id }) => {
   const { id: paramId } = useParams<{ id: string }>();
-  const { onRemovePage, order } = useFormPageContext();
+  const { onRemovePage, order, onSetAsFirstPage } = useFormPageContext();
 
   const isDeleteAllowed = order.length > 1;
+  const isSetAsFirstPageAllowed = order[0] !== id;
 
   const isActive = paramId === id;
 
@@ -44,7 +45,12 @@ export const FormPageSettings: React.FC<Pick<FormPage, 'id'>> = ({ id }) => {
             Settings
           </Dropdown.Lib.Label>
           <Dropdown.Lib.Group>
-            <SettingMenuItem title={'Set as first page'} icon={<FlagIcon className="text-blue-600" />} />
+            <SettingMenuItem
+              disabled={!isSetAsFirstPageAllowed}
+              title={'Set as first page'}
+              onClick={() => onSetAsFirstPage(id)}
+              icon={<FlagIcon className="text-blue-600" />}
+            />
             <SettingMenuItem title={'Rename'} icon={<PencilIcon className="text-secondary-500" />} />
             <SettingMenuItem title={'Copy'} icon={<ClipboardIcon className="text-secondary-500" />} />
             <SettingMenuItem title={'Duplicate'} icon={<DoubleSquaresIcon className="text-secondary-500" />} />

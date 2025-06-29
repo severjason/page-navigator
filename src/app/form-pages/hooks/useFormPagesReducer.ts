@@ -26,11 +26,21 @@ type RemovePageAction = {
   id: string;
 };
 
-type ReorderPageAction = {
+type ReorderPageActionBase = {
   type: FormPageActionType.reorder;
   fromId: string;
-  toAfterId: string;
 };
+type ReorderPageActionAfter = ReorderPageActionBase & {
+  toAfterId: string;
+  toBeforeId?: never;
+};
+
+type ReorderPageActionBefore = ReorderPageActionBase & {
+  toAfterId?: never;
+  toBeforeId: string;
+};
+
+type ReorderPageAction = ReorderPageActionBase & (ReorderPageActionAfter | ReorderPageActionBefore);
 
 type SetPagesAction = {
   type: FormPageActionType.setPages;
@@ -94,8 +104,14 @@ function reducer(state: State, action: Action): State {
 
     case FormPageActionType.reorder: {
       const baseOrder = state.order.filter((id) => id !== action.fromId);
-      const index = baseOrder.indexOf(action.toAfterId);
-      const insertPos = index < 0 ? 0 : index + 1;
+      let insertPos = 0;
+      if (action.toBeforeId) {
+        const index = baseOrder.indexOf(action.toBeforeId);
+        insertPos = index < 0 ? 0 : index;
+      } else if (action.toAfterId) {
+        const index = baseOrder.indexOf(action.toAfterId);
+        insertPos = index < 0 ? 0 : index + 1;
+      }
       baseOrder.splice(insertPos, 0, action.fromId);
       const pages = { ...state.pages };
       const order = baseOrder.reduce<string[]>((res, id, i) => {

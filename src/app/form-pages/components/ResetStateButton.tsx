@@ -9,12 +9,12 @@ import { pagesPositionSort } from '@/app/form-pages/hooks/useFormPagesReducer';
 export const ResetStateButton: React.FC = () => {
   const { pages, order, onReset } = useFormPageContext();
   const contextPages = order
-    .map((pageId) => JSON.stringify({ id: pages[pageId].id, position: pages[pageId].position }))
+    .map((pageId) => JSON.stringify({ title: pages[pageId].title, position: pages[pageId].position }))
     .join();
 
   const defaultPages = Object.values(DEFAULT_PAGES_STATE)
     .sort(pagesPositionSort)
-    .map(({ id, position }) => JSON.stringify({ id, position }))
+    .map(({ title, position }) => JSON.stringify({ title, position }))
     .join();
 
   if (contextPages === defaultPages) return null;

@@ -1,10 +1,15 @@
+'use client';
+
 import React, { ReactNode } from 'react';
 
+import dynamic from 'next/dynamic';
 import { Layouts } from 'src/shared/components';
 
-import { FormPageLayout } from '@/app/form-pages/components/FormPageLayout';
+const FormPageLayout = dynamic(() => import('@/app/form-pages/components/FormPageLayout'), {
+  ssr: false,
+});
 
-export default async function PageLayout({ children }: { children: ReactNode }) {
+export default function PageLayout({ children }: { children: ReactNode }) {
   return (
     <Layouts.Public>
       <FormPageLayout>{children}</FormPageLayout>
