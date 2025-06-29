@@ -6,7 +6,7 @@ import { FormPageActionType, PositionedPage, useFormPagesReducer } from '@/app/f
 import { FormPage } from '@/app/form-pages/interfaces/formPage';
 import { getPersistedData, usePersist } from '@/shared/hooks/usePersist';
 
-const PERSIST_KEY = 'PERSISTED_PAGES';
+export const PAGES_PERSIST_KEY = 'PAGES_PERSIST_KEY';
 
 const infoId = uuid();
 const detailsId = uuid();
@@ -16,11 +16,11 @@ export const DEFAULT_PAGES_STATE = {
 } satisfies Record<string, PositionedPage>;
 
 export const useFormPages = () => {
-  const pages = getPersistedData(DEFAULT_PAGES_STATE, PERSIST_KEY);
+  const pages = getPersistedData(DEFAULT_PAGES_STATE, PAGES_PERSIST_KEY);
 
   const { state, dispatch } = useFormPagesReducer(pages);
 
-  usePersist(state.pages, PERSIST_KEY);
+  usePersist(state.pages, PAGES_PERSIST_KEY);
 
   const onAddPage = (afterId: string, newFormPage: Omit<FormPage, 'id'>) => {
     dispatch({ type: FormPageActionType.insertAfter, afterId, ...newFormPage });

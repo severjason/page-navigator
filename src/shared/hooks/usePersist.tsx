@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react';
 
+export const clearPersistedData = (persistKey: string) => localStorage.removeItem(persistKey);
+
 export const getPersistedData = <T,>(defaultData: T, persistKey: string) => {
   try {
     const persistedData = localStorage.getItem(persistKey);
